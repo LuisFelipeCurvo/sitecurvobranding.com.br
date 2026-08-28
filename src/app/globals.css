@@ -1,0 +1,160 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-obsidian: var(--obsidian);
+  --color-ash: var(--ash);
+  --color-ghost: var(--ghost);
+  --color-coral: var(--coral);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --animate-scroll-drip: scroll-drip 2.2s ease-in-out infinite;
+  --animate-caret-blink: caret-blink 1s step-end infinite;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  /* Curvo Branding — INVERTIDO 2026-08-27: o site agora é branco. Os nomes
+     dos tokens ficaram o oposto do que dizem: `--obsidian` é o FUNDO (branco),
+     `--ghost` é o TEXTO (preto). `--ash` (cinza médio) e `--coral` inalterados.
+     Tudo que usa `bg-obsidian` / `text-ghost` / `bg-ghost` etc. inverte sozinho. */
+  --obsidian: #ffffff;
+  --ash: #5a5a5a;
+  --ghost: #000000;
+  --coral: #fc635b;
+  /* Optika (next/font/local, ver src/app/fonts.ts) — a var já traz o fallback */
+  --font-sans: var(--font-optika), sans-serif;
+
+  --background: var(--obsidian);
+  --foreground: var(--ghost);
+  --card: var(--obsidian);
+  --card-foreground: var(--ghost);
+  --popover: var(--obsidian);
+  --popover-foreground: var(--ghost);
+  --primary: var(--ghost);
+  --primary-foreground: var(--obsidian);
+  --secondary: var(--ash);
+  --secondary-foreground: var(--ghost);
+  --muted: var(--ash);
+  --muted-foreground: var(--ash);
+  --accent: var(--ash);
+  --accent-foreground: var(--ghost);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: color-mix(in oklab, var(--ghost) 18%, transparent);
+  --input: color-mix(in oklab, var(--ghost) 18%, transparent);
+  --ring: var(--ash);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0px;
+  --sidebar: var(--obsidian);
+  --sidebar-foreground: var(--ghost);
+  --sidebar-primary: var(--ghost);
+  --sidebar-primary-foreground: var(--obsidian);
+  --sidebar-accent: var(--ash);
+  --sidebar-accent-foreground: var(--ghost);
+  --sidebar-border: color-mix(in oklab, var(--ghost) 18%, transparent);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+/* No .dark variant: Curvo Branding is a deliberate single-theme "midnight
+   gallery" direction (design-system.md v2), not a light/dark toggle. */
+
+@keyframes scroll-drip {
+  0% {
+    top: -100%;
+  }
+  60% {
+    top: 100%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+@keyframes caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  /* Single monochrome focus treatment for every interactive element — a
+     ghost-white hairline bracket, consistent with the "gallery wall" system
+     (no chromatic focus ring). Keyboard-only via :focus-visible. */
+  :focus-visible {
+    outline: 1.5px solid var(--ghost);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+}
+
+/* The constellation infests via rAF; the workflow reveals via framer-motion —
+   both already gate on this. Anything CSS-driven should stop here too. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

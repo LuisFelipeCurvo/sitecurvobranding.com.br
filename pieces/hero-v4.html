@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Curvo Branding — Hero (midnight) v4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --obsidian:#000000;
+    --ash:#5A5A5A;
+    --white:#FFFFFF;
+    --coral:#FC635B;
+    --font:'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{ background:var(--obsidian); }
+  body{
+    font-family:var(--font);
+    font-weight:400;
+    color:var(--white);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+
+  canvas.constellation{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:1;
+  }
+
+  header{
+    position:relative;
+    z-index:3;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    padding:36px 56px 0;
+  }
+  .logo{
+    display:flex;
+    flex-direction:column;
+    font-size:20px;
+    line-height:1.15;
+    letter-spacing:-0.4px;
+    text-transform:uppercase;
+  }
+  .logo .line2{ display:flex; align-items:baseline; }
+  .logo .plus{
+    color:var(--coral);
+    margin-right:7px;
+  }
+  nav ul{
+    display:flex;
+    gap:32px;
+    list-style:none;
+  }
+  nav a{
+    color:var(--white);
+    text-decoration:none;
+    font-size:14px;
+    font-weight:400;
+    letter-spacing:0;
+    text-transform:uppercase;
+    padding-bottom:9px;
+    position:relative;
+    opacity:0.72;
+  }
+  nav a.active{ opacity:1; }
+  nav a.active::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:1px;
+    background:var(--white);
+  }
+
+  .tags{
+    position:relative;
+    z-index:3;
+    list-style:none;
+    padding:64px 56px 0;
+    font-size:14px;
+    font-weight:400;
+    letter-spacing:0;
+    text-transform:uppercase;
+    color:var(--white);
+    opacity:0.78;
+    line-height:2.3;
+  }
+
+  .headline-row{
+    position:relative;
+    z-index:3;
+    flex:1;
+    display:flex;
+    align-items:flex-end;
+    padding:24px 56px 0;
+    min-height:0;
+  }
+  h1{
+    font-size:clamp(40px, 6.6vw, 77px);
+    font-weight:400;
+    line-height:0.92;
+    letter-spacing:-0.045em;
+    text-transform:uppercase;
+    max-width:15ch;
+  }
+
+  /* in-flow bottom zone — never overlaps the headline, whatever height it wraps to */
+  .hero-bottom{
+    position:relative;
+    z-index:3;
+    flex-shrink:0;
+    padding:32px 56px 36px;
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+  }
+  .hero-floor{
+    height:1px;
+    background:var(--ash);
+    opacity:0.5;
+  }
+
+  .scroll-cue{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ash);
+  }
+  .scroll-cue .line{
+    width:1px;
+    height:38px;
+    background:var(--ash);
+    position:relative;
+    overflow:hidden;
+  }
+  .scroll-cue .line::after{
+    content:"";
+    position:absolute;
+    left:0; top:-100%;
+    width:100%; height:100%;
+    background:var(--white);
+    animation:scrollDrip 2.2s ease-in-out infinite;
+  }
+  @keyframes scrollDrip{
+    0%{ top:-100%; }
+    60%{ top:100%; }
+    100%{ top:100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .scroll-cue .line::after{ animation:none; top:0; }
+  }
+
+  @media (max-width: 860px){
+    header{ flex-direction:column; gap:20px; padding:28px 24px 0; }
+    nav ul{ gap:16px; flex-wrap:wrap; }
+    .tags{ padding:40px 24px 0; }
+    .headline-row{ padding:24px 24px 0; align-items:flex-end; }
+    h1{ max-width:none; }
+    .hero-bottom{ padding:24px 24px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <canvas class="constellation" id="constellation"></canvas>
+
+  <header>
+    <div class="logo">CURVO<span class="line2"><span class="plus">+</span>BRANDING</span></div>
+    <nav>
+      <ul>
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#">Projetos</a></li>
+        <li><a href="#">Por que fazemos</a></li>
+        <li><a href="#">O que fazemos</a></li>
+        <li><a href="#">Como fazemos</a></li>
+        <li><a href="#">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <ul class="tags">
+    <li>&gt;&gt; Estratégia de Negócio</li>
+    <li>&gt;&gt; Design de Marcas</li>
+    <li>&gt;&gt; Comunicação</li>
+    <li>&gt;&gt; Tecnologias Emergentes</li>
+  </ul>
+
+  <div class="headline-row">
+    <h1>Construímos as marcas mais f*das e estruturadas do mercado</h1>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-floor"></div>
+    <div class="scroll-cue"><span class="line"></span>Scroll</div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var canvas = document.getElementById('constellation');
+  var ctx = canvas.getContext('2d');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var w, h, nodes;
+
+  function rand(min, max){ return Math.random() * (max - min) + min; }
+
+  function resize(){
+    var rect = canvas.parentElement.getBoundingClientRect();
+    w = rect.width; h = rect.height;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    buildNodes();
+  }
+
+  function buildNodes(){
+    var count = Math.round((w * h) / 34000);
+    count = Math.max(26, Math.min(56, count));
+    nodes = [];
+    for (var i = 0; i < count; i++){
+      nodes.push({
+        x: rand(0, w),
+        y: rand(0, h),
+        vx: rand(-0.06, 0.06),
+        vy: rand(-0.05, 0.05),
+        r: rand(1.4, 3.2)
+      });
+    }
+  }
+
+  var linkDist = 190;
+
+  function step(){
+    ctx.clearRect(0, 0, w, h);
+
+    for (var i = 0; i < nodes.length; i++){
+      var n = nodes[i];
+      if (!reduceMotion){
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < -20) n.x = w + 20;
+        if (n.x > w + 20) n.x = -20;
+        if (n.y < -20) n.y = h + 20;
+        if (n.y > h + 20) n.y = -20;
+      }
+    }
+
+    ctx.lineWidth = 1;
+    for (var a = 0; a < nodes.length; a++){
+      for (var b = a + 1; b < nodes.length; b++){
+        var dx = nodes[a].x - nodes[b].x;
+        var dy = nodes[a].y - nodes[b].y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < linkDist){
+          var alpha = (1 - dist / linkDist) * 0.35;
+          ctx.strokeStyle = 'rgba(90,90,90,' + alpha.toFixed(3) + ')';
+          ctx.beginPath();
+          ctx.moveTo(nodes[a].x, nodes[a].y);
+          ctx.lineTo(nodes[b].x, nodes[b].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    ctx.fillStyle = 'rgba(90,90,90,0.85)';
+    for (var j = 0; j < nodes.length; j++){
+      var node = nodes[j];
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    if (!reduceMotion) requestAnimationFrame(step);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  step();
+})();
+</script>
+
+</body>
+</html>
