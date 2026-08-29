@@ -123,7 +123,10 @@ export function Workflow() {
 
   if (reduceMotion) {
     return (
-      <section className="relative z-[45] bg-obsidian px-6 pb-32 pt-28 sm:px-14 sm:pb-40 sm:pt-36">
+      <section
+        id="o-que-fazemos"
+        className="relative z-[45] bg-obsidian px-6 pb-32 pt-28 sm:px-14 sm:pb-40 sm:pt-36"
+      >
         <Eyebrow />
         <ol className="border-t border-ash/25">
           {STEPS.map((step, i) => (
@@ -136,6 +139,7 @@ export function Workflow() {
 
   return (
     <section
+      id="o-que-fazemos"
       ref={sectionRef}
       style={{ height: `${COUNT * 100}vh` }}
       className="relative"

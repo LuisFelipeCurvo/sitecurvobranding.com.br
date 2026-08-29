@@ -93,6 +93,7 @@ export function ClientSurfer() {
 
   return (
     <section
+      id="projetos"
       ref={sectionRef}
       style={{ height: `${CLIENTS.length * SCROLL_PER_ITEM}px` }}
       className="relative"

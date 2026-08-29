@@ -6,12 +6,10 @@ import { TypewriterHeadline } from "@/components/typewriter-headline";
 import { WHATSAPP_URL } from "@/lib/contact";
 
 const NAV_ITEMS = [
-  { label: "Home", href: "#", active: true },
-  { label: "Projetos", href: "#" },
-  { label: "Por que fazemos", href: "#" },
-  { label: "O que fazemos", href: "#" },
-  { label: "Como fazemos", href: "#" },
-  { label: "Contato", href: "#" },
+  { label: "Projetos", href: "#projetos" },
+  { label: "Por que fazemos", href: "#por-que-fazemos" },
+  { label: "O que fazemos", href: "#o-que-fazemos" },
+  { label: "Contato", href: WHATSAPP_URL, external: true },
 ];
 
 const TAGS = [
@@ -45,16 +43,11 @@ export function Hero() {
               <li key={item.label} className="whitespace-nowrap">
                 <a
                   href={item.href}
-                  aria-current={item.active ? "page" : undefined}
+                  target={item.external ? "_blank" : undefined}
+                  rel={item.external ? "noopener noreferrer" : undefined}
                   className="group -my-2 inline-block py-2 text-[11px] uppercase tracking-[0.02em] sm:text-xs"
                 >
-                  <span
-                    className={`relative inline-block pb-[9px] transition-colors duration-200 ${
-                      item.active
-                        ? "text-ghost after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-ghost"
-                        : "text-ghost/72 group-hover:text-ghost"
-                    }`}
-                  >
+                  <span className="relative inline-block pb-[9px] text-ghost/72 transition-colors duration-200 group-hover:text-ghost">
                     {item.label}
                   </span>
                 </a>

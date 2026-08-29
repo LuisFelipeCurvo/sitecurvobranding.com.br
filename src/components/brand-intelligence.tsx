@@ -26,7 +26,10 @@ export function BrandIntelligence() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="relative overflow-hidden px-6 py-28 sm:px-14 sm:py-40">
+    <section
+      id="por-que-fazemos"
+      className="relative overflow-hidden px-6 py-28 sm:px-14 sm:py-40"
+    >
       <motion.div
         initial={reduceMotion ? false : { opacity: 0, y: 28 }}
         whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
