@@ -5,9 +5,12 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { optika } from "./fonts";
 import { ConstellationCanvas } from "@/components/constellation-canvas";
+import { Footer } from "@/components/footer";
 
 const CLARITY_PROJECT_ID = "y9sekz06xv";
-const SITE_URL = "https://curvobranding.com.br";
+// endereço canônico = com "www" — é o único domínio ligado ao projeto na
+// Vercel; `curvobranding.com.br` (sem www) redireciona 307 pra cá.
+const SITE_URL = "https://www.curvobranding.com.br";
 const TITLE = "Curvo Branding | Inteligência de marca";
 const DESCRIPTION =
   "Construímos as marcas mais estruturadas do mercado. Estratégia de negócio, design de marcas, comunicação e tecnologias emergentes.";
@@ -82,6 +85,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
         <ConstellationCanvas />
         {children}
+        <Footer />
         <Analytics />
         <SpeedInsights />
         <Script id="clarity" strategy="afterInteractive">

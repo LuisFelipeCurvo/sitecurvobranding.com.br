@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://curvobranding.com.br/sitemap.xml",
+    sitemap: "https://www.curvobranding.com.br/sitemap.xml",
   };
 }
