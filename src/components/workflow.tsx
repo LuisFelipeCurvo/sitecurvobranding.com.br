@@ -120,22 +120,28 @@ export function Workflow() {
     offset: ["start start", "end end"],
   });
   const [activeIndex, setActiveIndex] = useState(0);
+  // `collapsed` = usuário clicou de novo no cabeçalho aberto pra fechar tudo.
+  // Qualquer scroll re-engata o scrub normal (volta a abrir uma etapa).
+  const [collapsed, setCollapsed] = useState(false);
   useMotionValueEvent(scrollYProgress, "change", (p) => {
+    setCollapsed(false);
     setActiveIndex(Math.min(COUNT - 1, Math.max(0, Math.floor(p * COUNT))));
   });
 
-  // clicar num cabeçalho leva a página até a faixa de scroll daquela etapa —
-  // o pin continua sendo a fonte da verdade, o clique é só um atalho. Pulo
-  // instantâneo (sem "smooth"): o scroll suave é cancelado pela animação do
-  // acordeão abrindo/fechando no meio do caminho.
+  // clicar num cabeçalho: se ele já está aberto, encolhe (fecha tudo); senão,
+  // abre essa etapa e leva a página até a faixa de scroll dela. Pulo instantâneo
+  // (o `scroll-behavior: smooth` global é engolido pela animação do acordeão).
   const goToStep = (i: number) => {
+    if (i === activeIndex && !collapsed) {
+      setCollapsed(true);
+      return;
+    }
     const el = sectionRef.current;
     if (!el) return;
+    setCollapsed(false);
     setActiveIndex(i);
     const scrollable = el.offsetHeight - window.innerHeight;
     const p = (i + 0.5) / COUNT; // meio da faixa, longe da borda entre etapas
-    // `instant` força o pulo ignorando o `scroll-behavior: smooth` global —
-    // scroll suave aqui é engolido pela animação do acordeão
     window.scrollTo({ top: el.offsetTop + p * scrollable, behavior: "instant" });
   };
 
@@ -173,7 +179,7 @@ export function Workflow() {
                 key={step.tag}
                 step={step}
                 index={i}
-                open={i === activeIndex}
+                open={!collapsed && i === activeIndex}
                 onSelect={goToStep}
               />
             ))}
