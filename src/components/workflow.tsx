@@ -98,6 +98,9 @@ const STEPS: Step[] = [
 ];
 
 const COUNT = STEPS.length;
+/** Quanto de scroll (em vh) cada etapa consome enquanto a seção está pinada.
+ *  Menor = passa mais rápido pela seção. Era 100; 55 deixa ~2x mais ágil. */
+const VH_PER_STEP = 55;
 
 /**
  * "Entenda o nosso workflow" — acordeão pinado (2026-08-27, pedido do usuário
@@ -141,7 +144,7 @@ export function Workflow() {
     <section
       id="o-que-fazemos"
       ref={sectionRef}
-      style={{ height: `${COUNT * 100}vh` }}
+      style={{ height: `${COUNT * VH_PER_STEP}vh` }}
       className="relative"
     >
       <div className="sticky top-0 z-[45] grid h-screen grid-rows-[auto_1fr] overflow-hidden bg-obsidian px-6 pb-[4vh] pt-[7vh] sm:px-14 sm:pt-[9vh]">

@@ -9,16 +9,22 @@ import {
   useMotionValue,
   type MotionValue,
 } from "framer-motion";
-import { Play } from "lucide-react";
+import { ArrowUpRight, Play } from "lucide-react";
 
 interface ClientItem {
   name: string;
-  year: string;
+  /** ano do projeto — opcional; sem ano, só o nome aparece na legenda */
+  year?: string;
+  /** capa do case (em `public/`); sem imagem, o card fica no placeholder ▶ */
+  image?: string;
 }
 
 const CLIENTS: ClientItem[] = [
-  { name: "Fernando Perez", year: "2020" },
-  { name: "Haru Oriental", year: "2014" },
+  { name: "Phytosfera", image: "/cases/phytosfera.jpg" },
+  { name: "Haru Oriental", year: "2014", image: "/cases/haru.jpg" },
+  { name: "Fernando Perez", year: "2020", image: "/cases/fernando-perez.jpg" },
+  // capas ainda não recebidas — ficam no placeholder ▶; ao chegar o arquivo
+  // em public/cases/, é só adicionar `image: "/cases/<slug>.jpg"` aqui:
   { name: "Forz Gym", year: "2024" },
   { name: "Grupo São Benedito", year: "2018" },
   { name: "Azuri", year: "2022" },
@@ -121,6 +127,20 @@ export function ClientSurfer() {
               ({CLIENTS.length})
             </span>
           </h2>
+          <a
+            href="https://www.behance.net/curvobranding"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group pointer-events-auto mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-[0.14em] text-ghost"
+          >
+            <span className="border-b border-ghost/40 pb-1 transition-colors group-hover:border-ghost">
+              Portfólio no Behance
+            </span>
+            <ArrowUpRight
+              className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              strokeWidth={1.25}
+            />
+          </a>
         </div>
 
         <div className="pointer-events-none absolute bottom-8 right-6 text-xs uppercase tracking-[0.14em] text-ash sm:bottom-9 sm:right-14">
@@ -166,6 +186,10 @@ function SurferCard({
   geo: { cardW: number; cardH: number; stepX: number; stepY: number; stepZ: number };
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
+  // enquanto o arquivo da capa não está em public/cases/, o card cai no
+  // placeholder ▶ em vez de mostrar imagem quebrada
+  const [imgOk, setImgOk] = useState(true);
+  const hasImage = !!client.image && imgOk;
 
   const distance = useTransform([mouseX, mouseY], ([mx, my]) => {
     if (!ref.current) return 400;
@@ -191,7 +215,9 @@ function SurferCard({
   return (
     <motion.div
       ref={ref}
-      className="absolute border border-ash/40 bg-black/[0.055]"
+      className={`absolute border border-ash/45 ${
+        hasImage ? "" : "bg-black/[0.055]"
+      }`}
       style={{
         width: geo.cardW,
         height: geo.cardH,
@@ -207,24 +233,38 @@ function SurferCard({
         {String(index + 1).padStart(2, "0")}
       </span>
 
-      <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,rgba(0,0,0,0.04)_0px,rgba(0,0,0,0.04)_1px,transparent_1px,transparent_3px)]" />
-
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="flex h-12 w-12 items-center justify-center rounded-full border border-ghost/60">
-          <Play
-            size={16}
-            strokeWidth={1.5}
-            className="ml-[2px] fill-ghost text-ghost"
-          />
-        </span>
-      </div>
+      {hasImage ? (
+        // Case real: capa colorida, sem degradê — a foto ocupa o card inteiro.
+        <img
+          src={client.image}
+          alt={client.name}
+          loading="lazy"
+          draggable={false}
+          onError={() => setImgOk(false)}
+          className="absolute inset-0 h-full w-full object-cover [filter:contrast(1.03)]"
+        />
+      ) : (
+        <>
+          <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,rgba(0,0,0,0.04)_0px,rgba(0,0,0,0.04)_1px,transparent_1px,transparent_3px)]" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="flex h-12 w-12 items-center justify-center rounded-full border border-ghost/60">
+              <Play
+                size={16}
+                strokeWidth={1.5}
+                className="ml-[2px] fill-ghost text-ghost"
+              />
+            </span>
+          </div>
+        </>
+      )}
 
       {/* Stacked, not side-by-side, and allowed to wrap to 2 lines: a long
           name (e.g. "Grupo São Benedito") must never get clipped against the
-          year, regardless of card width. */}
+          year, regardless of card width. Fica dentro do card, na base — igual
+          pro placeholder e pro card com foto. */}
       <span className="absolute inset-x-2 bottom-2 flex flex-col gap-1 text-[10px] uppercase leading-tight sm:text-xs">
         <span className="break-words">{client.name}</span>
-        <span className="text-ash">{client.year}</span>
+        {client.year ? <span className="text-ash">{client.year}</span> : null}
       </span>
     </motion.div>
   );
