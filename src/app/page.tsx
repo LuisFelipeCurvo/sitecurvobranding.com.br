@@ -2,7 +2,6 @@ import { Hero } from "@/components/hero";
 import { ClientSurfer } from "@/components/client-surfer";
 import { BrandIntelligence } from "@/components/brand-intelligence";
 import { Workflow } from "@/components/workflow";
-import { InstagramFeed } from "@/components/instagram-feed";
 import { ScrollToHash } from "@/components/scroll-to-hash";
 
 export default function Home() {
@@ -13,7 +12,6 @@ export default function Home() {
       <ClientSurfer />
       <BrandIntelligence />
       <Workflow />
-      <InstagramFeed />
     </main>
   );
 }
