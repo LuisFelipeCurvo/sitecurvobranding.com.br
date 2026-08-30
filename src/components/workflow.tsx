@@ -124,6 +124,21 @@ export function Workflow() {
     setActiveIndex(Math.min(COUNT - 1, Math.max(0, Math.floor(p * COUNT))));
   });
 
+  // clicar num cabeçalho leva a página até a faixa de scroll daquela etapa —
+  // o pin continua sendo a fonte da verdade, o clique é só um atalho. Pulo
+  // instantâneo (sem "smooth"): o scroll suave é cancelado pela animação do
+  // acordeão abrindo/fechando no meio do caminho.
+  const goToStep = (i: number) => {
+    const el = sectionRef.current;
+    if (!el) return;
+    setActiveIndex(i);
+    const scrollable = el.offsetHeight - window.innerHeight;
+    const p = (i + 0.5) / COUNT; // meio da faixa, longe da borda entre etapas
+    // `instant` força o pulo ignorando o `scroll-behavior: smooth` global —
+    // scroll suave aqui é engolido pela animação do acordeão
+    window.scrollTo({ top: el.offsetTop + p * scrollable, behavior: "instant" });
+  };
+
   if (reduceMotion) {
     return (
       <section
@@ -159,6 +174,7 @@ export function Workflow() {
                 step={step}
                 index={i}
                 open={i === activeIndex}
+                onSelect={goToStep}
               />
             ))}
           </ol>
@@ -186,34 +202,51 @@ function AccordionStep({
   index,
   open,
   reduced = false,
+  onSelect,
 }: {
   step: Step;
   index: number;
   open: boolean;
   reduced?: boolean;
+  /** se passado, o cabeçalho vira botão e clicar abre esta etapa */
+  onSelect?: (index: number) => void;
 }) {
+  const headerInner = (
+    <>
+      <motion.span
+        className="flex shrink-0"
+        animate={reduced ? undefined : { rotate: open ? 0 : -90 }}
+        transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+      >
+        <ArrowDown className="size-5 sm:size-6" strokeWidth={1.25} />
+      </motion.span>
+      <span
+        className={`text-xs uppercase tracking-[0.16em] transition-colors duration-300 sm:text-[13px] ${
+          open ? "text-ghost" : "text-ash group-hover:text-ghost"
+        }`}
+      >
+        {step.tag}
+      </span>
+      <span className="ml-auto font-mono text-[11px] tabular-nums text-ash/70">
+        {String(index + 1).padStart(2, "0")} / {String(COUNT).padStart(2, "0")}
+      </span>
+    </>
+  );
+
   return (
     <li className="border-b border-ash/25">
-      {/* cabeçalho — sempre visível */}
-      <div className="flex items-center gap-4 py-4 sm:py-5">
-        <motion.span
-          className="flex shrink-0"
-          animate={reduced ? undefined : { rotate: open ? 0 : -90 }}
-          transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+      {/* cabeçalho — sempre visível; clicável quando `onSelect` existe */}
+      {onSelect ? (
+        <button
+          type="button"
+          onClick={() => onSelect(index)}
+          className="group flex w-full cursor-pointer items-center gap-4 py-4 text-left sm:py-5"
         >
-          <ArrowDown className="size-5 sm:size-6" strokeWidth={1.25} />
-        </motion.span>
-        <span
-          className={`text-xs uppercase tracking-[0.16em] transition-colors duration-300 sm:text-[13px] ${
-            open ? "text-ghost" : "text-ash"
-          }`}
-        >
-          {step.tag}
-        </span>
-        <span className="ml-auto font-mono text-[11px] tabular-nums text-ash/70">
-          {String(index + 1).padStart(2, "0")} / {String(COUNT).padStart(2, "0")}
-        </span>
-      </div>
+          {headerInner}
+        </button>
+      ) : (
+        <div className="flex items-center gap-4 py-4 sm:py-5">{headerInner}</div>
+      )}
 
       <AnimatePresence initial={false}>
         {open && (
