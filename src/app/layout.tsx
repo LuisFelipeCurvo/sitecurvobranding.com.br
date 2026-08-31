@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { optika } from "./fonts";
 import { ConstellationCanvas } from "@/components/constellation-canvas";
 import { Footer } from "@/components/footer";
+import { CookieConsent } from "@/components/cookie-consent";
 
-const CLARITY_PROJECT_ID = "y9sekz06xv";
 // endereço canônico = com "www" — é o único domínio ligado ao projeto na
 // Vercel; `curvobranding.com.br` (sem www) redireciona 307 pra cá.
 const SITE_URL = "https://www.curvobranding.com.br";
@@ -88,13 +87,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Footer />
         <Analytics />
         <SpeedInsights />
-        <Script id="clarity" strategy="afterInteractive">
-          {`(function(c,l,a,r,i,t,y){
-              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window, document, "clarity", "script", "${CLARITY_PROJECT_ID}");`}
-        </Script>
+        <CookieConsent />
       </body>
     </html>
   );
