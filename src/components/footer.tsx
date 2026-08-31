@@ -28,14 +28,14 @@ export function Footer() {
       id="contato"
       className="relative z-[45] mt-auto border-t border-ash/20 bg-obsidian"
     >
-      <div className="flex flex-col gap-6 px-6 py-9 sm:px-14 md:flex-row md:items-center md:gap-10">
-        {/* mini-mapa da sede — à esquerda, P&B, cor no hover; abre no Google Maps */}
+      <div className="flex flex-row items-center gap-5 px-6 py-8 sm:gap-8 sm:px-14">
+        {/* mini-mapa QUADRADO à esquerda — P&B, cor no hover; abre no Google Maps */}
         <a
           href={MAPS_LINK}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Ver localização no Google Maps"
-          className="group relative block h-28 w-full shrink-0 overflow-hidden border border-ash/30 transition-colors hover:border-coral sm:h-28 sm:w-40"
+          className="group relative block size-24 shrink-0 overflow-hidden border border-ash/30 transition-colors hover:border-coral sm:size-28"
         >
           <iframe
             src={MAPS_EMBED}
@@ -46,8 +46,8 @@ export function Footer() {
           />
         </a>
 
-        {/* marca + redes + endereço */}
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-7">
+        {/* marca + redes + endereço — ao lado do mapa */}
+        <div className="flex min-w-0 flex-col gap-3">
           <div className="flex flex-col text-[15px] font-black uppercase leading-[1.05] tracking-[-0.02em]">
             <span className="flex items-baseline">
               Curvo<span className="ml-[5px] text-coral">+</span>
@@ -55,7 +55,7 @@ export function Footer() {
             <span>Branding</span>
           </div>
 
-          <ul className="flex items-center gap-3">
+          <ul className="flex items-center gap-2.5">
             {SOCIAL.map(({ label, href, Icon }) => (
               <li key={label}>
                 <a
@@ -71,7 +71,7 @@ export function Footer() {
             ))}
           </ul>
 
-          <p className="text-xs leading-[1.6] text-ash sm:border-l sm:border-ash/25 sm:pl-7">
+          <p className="text-xs leading-[1.6] text-ash">
             Av. Isaac Póvoas, 546 — Goiabeiras
             <br />
             Cuiabá — MT, 78032-015
