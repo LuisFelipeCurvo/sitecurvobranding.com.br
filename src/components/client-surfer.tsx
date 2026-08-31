@@ -19,16 +19,12 @@ interface ClientItem {
   image?: string;
 }
 
+// Só os cases com capa por enquanto. Pra adicionar mais: joga a imagem em
+// public/cases/ e coloca `{ name, year?, image: "/cases/<slug>.jpg" }` aqui.
 const CLIENTS: ClientItem[] = [
   { name: "Phytosfera", image: "/cases/phytosfera.jpg" },
   { name: "Haru Oriental", year: "2014", image: "/cases/haru.jpg" },
   { name: "Fernando Perez", year: "2020", image: "/cases/fernando-perez.jpg" },
-  // capas ainda não recebidas — ficam no placeholder ▶; ao chegar o arquivo
-  // em public/cases/, é só adicionar `image: "/cases/<slug>.jpg"` aqui:
-  { name: "Forz Gym", year: "2024" },
-  { name: "Grupo São Benedito", year: "2018" },
-  { name: "Azuri", year: "2022" },
-  { name: "Belflora", year: "2020" },
 ];
 
 // Scroll budget per card — the section is exactly this tall × card count,
@@ -123,9 +119,6 @@ export function ClientSurfer() {
             +1000 marcas
             <br />
             construídas
-            <span className="ml-2 align-top text-[0.35em] tabular-nums text-ash">
-              ({CLIENTS.length})
-            </span>
           </h2>
           <a
             href="https://www.behance.net/curvobranding"
