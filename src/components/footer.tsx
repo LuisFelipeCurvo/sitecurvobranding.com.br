@@ -1,13 +1,11 @@
 import { FaWhatsapp, FaInstagram, FaBehance } from "react-icons/fa6";
 import { WHATSAPP_URL } from "@/lib/contact";
 
-const MAPS_QUERY = "Av. Isaac Póvoas, 546 - Goiabeiras, Cuiabá - MT, 78032-015";
-const MAPS_EMBED = `https://maps.google.com/maps?hl=pt-BR&q=${encodeURIComponent(
-  MAPS_QUERY
-)}&z=15&output=embed`;
-const MAPS_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-  MAPS_QUERY
-)}`;
+// Perfil real da Curvo Branding no Google (Google Meu Negócio) — CID do lugar.
+// O embed mostra o marcador da empresa; o link abre o perfil (avaliações, rota).
+const GOOGLE_CID = "4242218117924173094";
+const MAPS_EMBED = `https://maps.google.com/maps?cid=${GOOGLE_CID}&hl=pt-BR&z=16&output=embed`;
+const MAPS_LINK = `https://maps.google.com/?cid=${GOOGLE_CID}`;
 
 const SOCIAL = [
   { label: "WhatsApp", href: WHATSAPP_URL, Icon: FaWhatsapp },
