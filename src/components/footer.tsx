@@ -61,13 +61,13 @@ export function Footer() {
           </p>
         </div>
 
-        {/* mini-mapa QUADRADO à direita — P&B, cor no hover; abre no Google Maps */}
+        {/* mapa da sede à direita — P&B, cor no hover; abre no Google Maps */}
         <a
           href={MAPS_LINK}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Ver localização no Google Maps"
-          className="group relative block size-24 shrink-0 overflow-hidden border border-ash/30 transition-colors hover:border-coral sm:size-28"
+          className="group relative block h-32 w-40 shrink-0 overflow-hidden border border-ash/30 transition-colors hover:border-coral sm:h-52 sm:w-auto sm:min-w-0 sm:flex-1 sm:shrink sm:[max-width:480px]"
         >
           <iframe
             src={MAPS_EMBED}
