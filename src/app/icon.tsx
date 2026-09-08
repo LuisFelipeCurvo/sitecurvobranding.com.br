@@ -4,16 +4,17 @@ import { join } from "path";
 
 export const runtime = "nodejs";
 
-// Ícone de tela inicial (iOS/Android) — mesmo desenho do favicon (icon.tsx):
-// "C" da Optika Black em preto + "+" coral sobrescrito, fundo branco.
-export const size = { width: 180, height: 180 };
+// Favicon — o "C" da Optika Black em preto com o "+" coral sobrescrito,
+// mesmo desenho do wordmark. Renderizado com a fonte real (mesma técnica
+// do opengraph-image).
+export const size = { width: 64, height: 64 };
 export const contentType = "image/png";
 
 const optika = readFileSync(
   join(process.cwd(), "src/app/fonts/Optika-Black.otf"),
 );
 
-export default function AppleIcon() {
+export default function Icon() {
   return new ImageResponse(
     (
       <div
@@ -32,7 +33,7 @@ export default function AppleIcon() {
           <div
             style={{
               display: "flex",
-              fontSize: 132,
+              fontSize: 52,
               lineHeight: 1,
               color: "#000000",
             }}
@@ -42,10 +43,10 @@ export default function AppleIcon() {
           <div
             style={{
               display: "flex",
-              fontSize: 66,
+              fontSize: 26,
               lineHeight: 1,
-              marginTop: -10,
-              marginLeft: 3,
+              marginTop: -4,
+              marginLeft: 1,
               color: "#fc635b",
             }}
           >
