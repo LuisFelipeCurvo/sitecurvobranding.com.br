@@ -5,14 +5,16 @@ import Script from "next/script";
 
 const STORAGE_KEY = "curvo-cookie-consent";
 const CLARITY_ID = "y9sekz06xv";
+const GA_ID = "G-E4EQD851JS";
 
 type Consent = "accepted" | "rejected" | null;
 
 /**
  * Aviso de cookies (LGPD). O Vercel Analytics/Speed Insights é sem cookie e
- * segue sempre ligado (layout.tsx). O **Microsoft Clarity** (grava sessão, usa
- * cookie) só carrega DEPOIS do "Aceitar" — é o que este componente controla.
- * A escolha fica no `localStorage`; enquanto não escolher, a faixa aparece.
+ * segue sempre ligado (layout.tsx). **Microsoft Clarity** e **Google
+ * Analytics** (ambos gravam cookie) só carregam DEPOIS do "Aceitar" — é o que
+ * este componente controla. A escolha fica no `localStorage`; enquanto não
+ * escolher, a faixa aparece.
  */
 export function CookieConsent() {
   const [consent, setConsent] = useState<Consent>(null);
@@ -42,13 +44,27 @@ export function CookieConsent() {
   return (
     <>
       {consent === "accepted" && (
-        <Script id="clarity" strategy="afterInteractive">
-          {`(function(c,l,a,r,i,t,y){
-              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window, document, "clarity", "script", "${CLARITY_ID}");`}
-        </Script>
+        <>
+          <Script id="clarity" strategy="afterInteractive">
+            {`(function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "${CLARITY_ID}");`}
+          </Script>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_ID}');
+            `}
+          </Script>
+        </>
       )}
 
       {ready && consent === null && (
