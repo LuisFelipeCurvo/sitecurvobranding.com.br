@@ -41,8 +41,8 @@ export default async function CasePage({
   if (!item) notFound();
 
   return (
-    <main className="relative z-[45] min-h-screen bg-obsidian px-6 pb-32 pt-24 sm:px-14 sm:pt-32">
-      <div className="mx-auto max-w-4xl">
+    <main className="relative z-[45] min-h-screen bg-obsidian pb-32 pt-24 sm:pt-32">
+      <div className="px-6 sm:px-14">
         <Link
           href="/#projetos"
           className="group mb-12 inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-ash transition-colors hover:text-ghost"
@@ -65,22 +65,26 @@ export default async function CasePage({
             {item.year}
           </p>
         ) : null}
+      </div>
 
-        <div className="mt-14 flex flex-col gap-3 sm:mt-16 sm:gap-4">
-          {item.images.map((img, i) => (
-            <Image
-              key={img.src}
-              src={img.src}
-              alt={`${item.name} — ${i + 1}`}
-              width={img.width}
-              height={img.height}
-              sizes="(max-width: 896px) 100vw, 896px"
-              priority={i === 0}
-              className="w-full h-auto"
-            />
-          ))}
-        </div>
+      {/* galeria sangra a tela inteira — sem o container/padding acima, pra
+          as fotos aparecerem no maior tamanho possível */}
+      <div className="mt-14 flex flex-col gap-3 sm:mt-16 sm:gap-4">
+        {item.images.map((img, i) => (
+          <Image
+            key={img.src}
+            src={img.src}
+            alt={`${item.name} — ${i + 1}`}
+            width={img.width}
+            height={img.height}
+            sizes="100vw"
+            priority={i === 0}
+            className="w-full h-auto"
+          />
+        ))}
+      </div>
 
+      <div className="px-6 sm:px-14">
         <a
           href={WHATSAPP_URL}
           target="_blank"
