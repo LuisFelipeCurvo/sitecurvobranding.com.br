@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import {
   motion,
   useScroll,
@@ -10,6 +11,7 @@ import {
   type MotionValue,
 } from "framer-motion";
 import { ArrowUpRight, Play } from "lucide-react";
+import { CASES } from "@/lib/cases";
 
 interface ClientItem {
   name: string;
@@ -17,15 +19,18 @@ interface ClientItem {
   year?: string;
   /** capa do case (em `public/`); sem imagem, o card fica no placeholder ▶ */
   image?: string;
+  /** se setado, o card inteiro vira link pra `/cases/<slug>` */
+  slug?: string;
 }
 
-// Só os cases com capa por enquanto. Pra adicionar mais: joga a imagem em
-// public/cases/ e coloca `{ name, year?, image: "/cases/<slug>.jpg" }` aqui.
-const CLIENTS: ClientItem[] = [
-  { name: "Phytosfera", image: "/cases/phytosfera.jpg" },
-  { name: "Haru Oriental", year: "2014", image: "/cases/haru.jpg" },
-  { name: "Fernando Perez", year: "2020", image: "/cases/fernando-perez.jpg" },
-];
+// Roster de clientes exibido no surfer 3D — os que têm case completo (ver
+// `src/lib/cases.ts`) ficam clicáveis; os demais entram sem `slug`.
+const CLIENTS: ClientItem[] = CASES.map((c) => ({
+  name: c.name,
+  year: c.year,
+  image: c.cover,
+  slug: c.slug,
+}));
 
 // Scroll budget per card — the section is exactly this tall × card count,
 // so the scroll is FINITE: once the last card settles, the pin releases and
@@ -226,6 +231,23 @@ function SurferCard({
         {String(index + 1).padStart(2, "0")}
       </span>
 
+      <CardBody client={client} hasImage={hasImage} onImgError={() => setImgOk(false)} />
+    </motion.div>
+  );
+}
+
+/** Conteúdo do card — vira `<Link>` pro case quando o cliente tem `slug`. */
+function CardBody({
+  client,
+  hasImage,
+  onImgError,
+}: {
+  client: ClientItem;
+  hasImage: boolean;
+  onImgError: () => void;
+}) {
+  const inner = (
+    <>
       {hasImage ? (
         // Case real: capa colorida, sem degradê — a foto ocupa o card inteiro.
         <img
@@ -233,7 +255,7 @@ function SurferCard({
           alt={client.name}
           loading="lazy"
           draggable={false}
-          onError={() => setImgOk(false)}
+          onError={onImgError}
           className="absolute inset-0 h-full w-full object-cover [filter:contrast(1.03)]"
         />
       ) : (
@@ -259,6 +281,20 @@ function SurferCard({
         <span className="break-words">{client.name}</span>
         {client.year ? <span className="text-ash">{client.year}</span> : null}
       </span>
-    </motion.div>
+    </>
   );
+
+  if (client.slug) {
+    return (
+      <Link
+        href={`/cases/${client.slug}`}
+        className="absolute inset-0 block cursor-pointer"
+        aria-label={`Ver case de ${client.name}`}
+      >
+        {inner}
+      </Link>
+    );
+  }
+
+  return <div className="absolute inset-0">{inner}</div>;
 }
