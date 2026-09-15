@@ -53,6 +53,8 @@ export function Footer() {
           </ul>
 
           <p className="text-xs leading-[1.6] text-ash">
+            Agência de branding em Cuiabá — criação de marcas e identidade visual
+            <br />
             Av. Isaac Póvoas, 546 — Goiabeiras
             <br />
             Cuiabá — MT, 78032-015

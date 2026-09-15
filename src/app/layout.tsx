@@ -10,9 +10,9 @@ import { CookieConsent } from "@/components/cookie-consent";
 // endereço canônico = com "www" — é o único domínio ligado ao projeto na
 // Vercel; `curvobranding.com.br` (sem www) redireciona 307 pra cá.
 const SITE_URL = "https://www.curvobranding.com.br";
-const TITLE = "Curvo Branding | Inteligência de marca";
+const TITLE = "Curvo Branding | Agência de Branding em Cuiabá";
 const DESCRIPTION =
-  "Construímos as marcas mais estruturadas do mercado. Estratégia de negócio, design de marcas, comunicação e tecnologias emergentes.";
+  "Agência de branding em Cuiabá. Construímos as marcas mais estruturadas do mercado: criação de marcas, design de marcas, estratégia de negócio, comunicação e tecnologias emergentes.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   keywords: [
     "branding",
     "agência de branding",
+    "agência de branding Cuiabá",
+    "criação de marcas",
+    "criação de marcas Cuiabá",
     "inteligência de marca",
     "design de marcas",
     "identidade visual",
@@ -54,11 +57,13 @@ export const metadata: Metadata = {
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "ProfessionalService",
   name: "Curvo Branding",
   url: SITE_URL,
+  image: `${SITE_URL}/opengraph-image`,
   logo: `${SITE_URL}/opengraph-image`,
   description: DESCRIPTION,
+  telephone: "+55 65 99685-3891",
   address: {
     "@type": "PostalAddress",
     streetAddress: "Av. Isaac Póvoas, 546 - Goiabeiras",
@@ -66,6 +71,24 @@ const organizationJsonLd = {
     addressRegion: "MT",
     postalCode: "78032-015",
     addressCountry: "BR",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: -15.5966469,
+    longitude: -56.1000608,
+  },
+  areaServed: ["Cuiabá", "Mato Grosso", "Brasil"],
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+    ],
+    opens: "08:00",
+    closes: "18:00",
   },
   sameAs: [
     "https://www.behance.net/curvobranding",
