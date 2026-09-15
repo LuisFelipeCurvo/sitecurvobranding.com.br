@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-import { WHATSAPP_URL } from "@/lib/contact";
+import { ContactCta } from "@/components/contact-cta";
 
 const PARAGRAPHS = [
   "Os negócios crescem mais rápido e de forma mais inteligente quando partem de um bom posicionamento e de uma base bem construída.",
@@ -58,20 +57,9 @@ export function BrandIntelligence() {
             ))}
           </div>
 
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group mt-9 inline-flex items-center gap-2 py-2 text-xs uppercase tracking-[0.16em] text-ghost"
-          >
-            <span className="border-b border-ghost/40 pb-1 transition-colors group-hover:border-ghost">
-              Vem trocar uma ideia com a gente
-            </span>
-            <ArrowUpRight
-              className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              strokeWidth={1.25}
-            />
-          </a>
+          <ContactCta className="mt-9">
+            Vem trocar uma ideia com a gente
+          </ContactCta>
         </div>
 
         {/* fotos — direita. Recortes P&B em fundo transparente: sentam direto no

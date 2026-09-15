@@ -3,13 +3,12 @@
 import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { TypewriterHeadline } from "@/components/typewriter-headline";
-import { WHATSAPP_URL } from "@/lib/contact";
+import { openContactForm } from "@/lib/tally";
 
 const NAV_ITEMS = [
   { label: "Projetos", href: "#projetos" },
   { label: "Por que fazemos", href: "#por-que-fazemos" },
   { label: "O que fazemos", href: "#o-que-fazemos" },
-  { label: "Contato", href: WHATSAPP_URL, external: true },
 ];
 
 const TAGS = [
@@ -43,8 +42,6 @@ export function Hero() {
               <li key={item.label} className="whitespace-nowrap">
                 <a
                   href={item.href}
-                  target={item.external ? "_blank" : undefined}
-                  rel={item.external ? "noopener noreferrer" : undefined}
                   className="group -my-2 inline-block py-2 text-[11px] uppercase tracking-[0.02em] sm:text-xs"
                 >
                   <span className="relative inline-block pb-[9px] text-ghost/72 transition-colors duration-200 group-hover:text-ghost">
@@ -53,6 +50,17 @@ export function Hero() {
                 </a>
               </li>
             ))}
+            <li className="whitespace-nowrap">
+              <button
+                type="button"
+                onClick={openContactForm}
+                className="group -my-2 inline-block py-2 text-[11px] uppercase tracking-[0.02em] sm:text-xs"
+              >
+                <span className="relative inline-block pb-[9px] text-ghost/72 transition-colors duration-200 group-hover:text-ghost">
+                  Contato
+                </span>
+              </button>
+            </li>
           </ul>
         </nav>
       </header>
@@ -61,17 +69,16 @@ export function Hero() {
       <div className="flex flex-1 flex-col items-center justify-center gap-9 px-6 py-10 sm:gap-12 sm:px-14">
         <TypewriterHeadline onFirstComplete={() => setRevealed(true)} />
         {revealed && (
-          <motion.a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <motion.button
+            type="button"
+            onClick={openContactForm}
             initial={reduceMotion ? false : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
             className="inline-block bg-ghost px-8 py-4 text-center text-xs uppercase tracking-[0.16em] text-obsidian transition-opacity duration-200 hover:opacity-90 focus-visible:outline-obsidian sm:tracking-[0.18em] sm:text-[13px]"
           >
             Vem trocar uma ideia com a gente
-          </motion.a>
+          </motion.button>
         )}
       </div>
 

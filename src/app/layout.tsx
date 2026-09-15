@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -111,6 +112,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Analytics />
         <SpeedInsights />
         <CookieConsent />
+        {/* widget do Tally — abre o formulário de contato em popup, ver
+            src/lib/tally.ts e src/components/contact-cta.tsx */}
+        <Script
+          src="https://tally.so/widgets/embed.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

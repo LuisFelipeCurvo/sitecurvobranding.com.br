@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
-import { WHATSAPP_URL } from "@/lib/contact";
+import { ArrowLeft } from "lucide-react";
+import { ContactCta } from "@/components/contact-cta";
 import { CASES, getCase } from "@/lib/cases";
 
 export function generateStaticParams() {
@@ -86,20 +86,9 @@ export default async function CasePage({
       </div>
 
       <div className="px-6 sm:px-14">
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group mt-16 inline-flex items-center gap-2 py-2 text-xs uppercase tracking-[0.16em] text-ghost sm:mt-20"
-        >
-          <span className="border-b border-ghost/40 pb-1 transition-colors group-hover:border-ghost">
-            Quero uma marca assim
-          </span>
-          <ArrowUpRight
-            className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            strokeWidth={1.25}
-          />
-        </a>
+        <ContactCta className="mt-16 sm:mt-20">
+          Quero uma marca assim
+        </ContactCta>
       </div>
     </main>
   );

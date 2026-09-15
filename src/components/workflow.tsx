@@ -8,8 +8,8 @@ import {
   useReducedMotion,
   useScroll,
 } from "framer-motion";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
-import { WHATSAPP_URL } from "@/lib/contact";
+import { ArrowDown } from "lucide-react";
+import { ContactCta } from "@/components/contact-cta";
 
 interface Step {
   tag: string;
@@ -301,20 +301,7 @@ function AccordionStep({
                   })}
                 </div>
 
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group mt-5 inline-flex items-center gap-2 py-2 text-xs uppercase tracking-[0.16em] text-ghost"
-                >
-                  <span className="border-b border-ghost/40 pb-1 transition-colors group-hover:border-ghost">
-                    {step.cta}
-                  </span>
-                  <ArrowUpRight
-                    className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                    strokeWidth={1.25}
-                  />
-                </a>
+                <ContactCta className="mt-5">{step.cta}</ContactCta>
               </div>
 
               {/* ilustração — escondida no mobile */}
