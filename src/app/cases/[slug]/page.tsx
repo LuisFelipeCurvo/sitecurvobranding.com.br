@@ -78,6 +78,7 @@ export default async function CasePage({
             width={img.width}
             height={img.height}
             sizes="100vw"
+            quality={90}
             priority={i === 0}
             className="w-full h-auto"
           />
