@@ -1,12 +1,12 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
-import { openContactForm } from "@/lib/tally";
+import { openContactForm } from "@/lib/contact-form";
 
 /**
  * CTA padrão do site ("texto sublinhado + seta") — usado em Inteligência de
- * Marca, cada passo do Workflow e nas páginas de case. Abre o formulário do
- * Tally em vez de ir direto pro WhatsApp (ver src/lib/tally.ts).
+ * Marca, cada passo do Workflow e nas páginas de case. Abre o modal de
+ * contato em vez de ir direto pro WhatsApp (ver src/lib/contact-form.ts).
  */
 export function ContactCta({
   children,
