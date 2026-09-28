@@ -1,5 +1,6 @@
 import { FaWhatsapp, FaInstagram, FaBehance } from "react-icons/fa6";
 import { WHATSAPP_URL } from "@/lib/contact";
+import { LazyMap } from "@/components/lazy-map";
 
 // Perfil real da Curvo Branding no Google (Google Meu Negócio) — CID do lugar.
 // O embed mostra o marcador da empresa; o link abre o perfil (avaliações, rota).
@@ -64,11 +65,9 @@ export function Footer() {
           aria-label="Ver localização no Google Maps"
           className="group relative block h-32 w-40 shrink-0 overflow-hidden border border-ash/30 transition-colors hover:border-coral sm:h-52 sm:w-auto sm:min-w-0 sm:flex-1 sm:shrink sm:[max-width:480px]"
         >
-          <iframe
+          <LazyMap
             src={MAPS_EMBED}
             title="Localização da Curvo Branding em Cuiabá"
-            loading="lazy"
-            tabIndex={-1}
             className="pointer-events-none h-full w-full [filter:grayscale(1)_contrast(1.05)] transition-[filter] duration-500 group-hover:[filter:none]"
           />
         </a>

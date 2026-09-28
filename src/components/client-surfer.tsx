@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   motion,
@@ -250,10 +251,11 @@ function CardBody({
     <>
       {hasImage ? (
         // Case real: capa colorida, sem degradê — a foto ocupa o card inteiro.
-        <img
-          src={client.image}
+        <Image
+          src={client.image!}
           alt={client.name}
-          loading="lazy"
+          fill
+          sizes="(max-width: 768px) 45vw, 320px"
           draggable={false}
           onError={onImgError}
           className="absolute inset-0 h-full w-full object-cover [filter:contrast(1.03)]"

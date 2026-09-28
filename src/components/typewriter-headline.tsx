@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 
 /**
  * Headline da hero com efeito máquina de escrever.
@@ -108,12 +108,9 @@ export function TypewriterHeadline({
   }, [reduceMotion]);
 
   return (
-    <motion.h1
+    <h1
       aria-label={`${STATIC_TEXT} ${TYPED_TEXT}`}
       className="relative mx-auto max-w-[100rem] text-center text-[clamp(38px,5vw,64px)] font-medium uppercase leading-[0.98] tracking-[-0.03em]"
-      initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
     >
       {/* camada fantasma — reserva a altura das 3 linhas cheias (5 no mobile,
           onde a linha 1 e a "estruturadas" quebram). Trava a altura da headline
@@ -152,7 +149,7 @@ export function TypewriterHeadline({
           )}
         </span>
       </span>
-    </motion.h1>
+    </h1>
   );
 }
 
