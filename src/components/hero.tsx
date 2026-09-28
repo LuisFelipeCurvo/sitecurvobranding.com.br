@@ -32,12 +32,12 @@ export function Hero() {
       <header className="flex flex-col gap-4 px-6 pt-7 sm:flex-row sm:items-start sm:justify-between sm:gap-6 sm:px-14 sm:pt-9">
         <img src="/brand/logo.png" alt="Curvo Branding" width={372} height={140} className="h-10 sm:h-[42px] w-auto shrink-0 self-start" />
         <nav>
-          <ul className="flex flex-wrap gap-x-4 gap-y-2 sm:gap-x-[18px] lg:gap-x-6">
+          <ul className="flex justify-between gap-x-2 sm:flex-wrap sm:justify-start sm:gap-x-[18px] sm:gap-y-2 lg:gap-x-6">
             {NAV_ITEMS.map((item) => (
               <li key={item.label} className="whitespace-nowrap">
                 <a
                   href={item.href}
-                  className="group -my-2 inline-block py-2 text-[11px] uppercase tracking-[0.02em] sm:text-xs"
+                  className="group -my-2 inline-block py-2 text-[clamp(9px,2.5vw,11px)] uppercase tracking-[0.02em] sm:text-xs"
                 >
                   <span className="relative inline-block pb-[9px] text-ghost/72 transition-colors duration-200 group-hover:text-ghost">
                     {item.label}
@@ -49,7 +49,7 @@ export function Hero() {
               <button
                 type="button"
                 onClick={openContactForm}
-                className="group -my-2 inline-block py-2 text-[11px] uppercase tracking-[0.02em] sm:text-xs"
+                className="group -my-2 inline-block py-2 text-[clamp(9px,2.5vw,11px)] uppercase tracking-[0.02em] sm:text-xs"
               >
                 <span className="relative inline-block pb-[9px] text-ghost/72 transition-colors duration-200 group-hover:text-ghost">
                   Contato

@@ -44,19 +44,15 @@ export default async function CasePage({
     <main className="relative z-[45] min-h-screen bg-obsidian pb-32 pt-24 sm:pt-32">
       <div className="px-6 sm:px-14">
         <Link
-          href="/#projetos"
+          href="/"
           className="group mb-12 inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-ash transition-colors hover:text-ghost"
         >
           <ArrowLeft
             className="size-4 transition-transform group-hover:-translate-x-0.5"
             strokeWidth={1.25}
           />
-          Voltar pros cases
+          Voltar para o site
         </Link>
-
-        <p className="mb-3 text-xs uppercase tracking-[0.16em] text-ash">
-          &gt;&gt; Case
-        </p>
         <h1 className="text-[clamp(30px,5.2vw,56px)] font-medium uppercase leading-[1] tracking-[-0.02em]">
           {item.name}
         </h1>
