@@ -146,9 +146,10 @@ export function Workflow() {
   };
 
   // mobile (<md): sem pin — etapas longas não cabem na tela travada e o
-  // scroll da página disputava com o scroll interno. Vira acordeão de toque.
+  // scroll da página disputava com o scroll interno. Cada etapa abre sozinha
+  // quando o cabeçalho entra na tela (e fica aberta); toque abre/fecha.
   const [mobile, setMobile] = useState(false);
-  const [openSteps, setOpenSteps] = useState<number[]>([0]);
+  const [openSteps, setOpenSteps] = useState<number[]>([]);
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
     const sync = () => setMobile(mq.matches);
@@ -177,6 +178,9 @@ export function Workflow() {
                 index={i}
                 open={openSteps.includes(i)}
                 onSelect={toggleStep}
+                onEnter={() =>
+                  setOpenSteps((s) => (s.includes(i) ? s : [...s, i]))
+                }
               />
             ),
           )}
@@ -233,6 +237,7 @@ function AccordionStep({
   open,
   reduced = false,
   onSelect,
+  onEnter,
 }: {
   step: Step;
   index: number;
@@ -240,6 +245,8 @@ function AccordionStep({
   reduced?: boolean;
   /** se passado, o cabeçalho vira botão e clicar abre esta etapa */
   onSelect?: (index: number) => void;
+  /** chamado uma vez quando o cabeçalho entra na tela (abre no scroll) */
+  onEnter?: () => void;
 }) {
   const headerInner = (
     <>
@@ -264,7 +271,11 @@ function AccordionStep({
   );
 
   return (
-    <li className="border-b border-ash/25">
+    <motion.li
+      className="border-b border-ash/25"
+      onViewportEnter={onEnter}
+      viewport={{ once: true, margin: "0px 0px -35% 0px" }}
+    >
       {/* cabeçalho — sempre visível; clicável quando `onSelect` existe */}
       {onSelect ? (
         <button
@@ -342,6 +353,6 @@ function AccordionStep({
           </motion.div>
         )}
       </AnimatePresence>
-    </li>
+    </motion.li>
   );
 }
