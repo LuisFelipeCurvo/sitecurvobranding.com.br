@@ -339,14 +339,14 @@ function AccordionStep({
                 <ContactCta className="mt-5">{step.cta}</ContactCta>
               </div>
 
-              {/* ilustração — escondida no mobile */}
-              <div className="hidden self-start md:block">
+              {/* ilustração — no mobile vem embaixo do texto, menor */}
+              <div className="self-start">
                 <img
                   src={step.image}
                   alt=""
                   aria-hidden="true"
                   loading="lazy"
-                  className="w-full max-w-[300px] [filter:brightness(0)]"
+                  className="w-full max-w-[220px] [filter:brightness(0)] md:max-w-[300px]"
                 />
               </div>
             </div>
