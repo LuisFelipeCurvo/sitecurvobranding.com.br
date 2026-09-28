@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -6,7 +7,6 @@ import { optika } from "./fonts";
 import { ConstellationCanvas } from "@/components/constellation-canvas";
 import { Footer } from "@/components/footer";
 import { CookieConsent } from "@/components/cookie-consent";
-import { ContactFormModal } from "@/components/contact-form-modal";
 
 // endereço canônico = com "www" — é o único domínio ligado ao projeto na
 // Vercel; `curvobranding.com.br` (sem www) redireciona 307 pra cá.
@@ -112,7 +112,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Analytics />
         <SpeedInsights />
         <CookieConsent />
-        <ContactFormModal />
+        {/* widget do Tally — abre o formulário de contato em popup, ver
+            src/lib/tally.ts e src/components/contact-cta.tsx */}
+        <Script
+          src="https://tally.so/widgets/embed.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { TypewriterHeadline } from "@/components/typewriter-headline";
-import { openContactForm } from "@/lib/contact-form";
+import { openContactForm } from "@/lib/tally";
 
 const NAV_ITEMS = [
   { label: "Projetos", href: "#projetos" },
