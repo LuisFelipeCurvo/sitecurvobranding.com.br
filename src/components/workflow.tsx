@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
@@ -145,17 +145,41 @@ export function Workflow() {
     window.scrollTo({ top: el.offsetTop + p * scrollable, behavior: "instant" });
   };
 
-  if (reduceMotion) {
+  // mobile (<md): sem pin — etapas longas não cabem na tela travada e o
+  // scroll da página disputava com o scroll interno. Vira acordeão de toque.
+  const [mobile, setMobile] = useState(false);
+  const [openSteps, setOpenSteps] = useState<number[]>([0]);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const sync = () => setMobile(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  const toggleStep = (i: number) =>
+    setOpenSteps((s) => (s.includes(i) ? s.filter((x) => x !== i) : [...s, i]));
+
+  if (reduceMotion || mobile) {
     return (
       <section
         id="o-que-fazemos"
-        className="relative z-[45] bg-obsidian px-6 pb-32 pt-28 sm:px-14 sm:pb-40 sm:pt-36"
+        className="relative z-[45] bg-obsidian px-6 pb-32 pt-6 sm:px-14 sm:pb-40 sm:pt-36"
       >
         <Eyebrow />
         <ol className="border-t border-ash/25">
-          {STEPS.map((step, i) => (
-            <AccordionStep key={step.tag} step={step} index={i} open reduced />
-          ))}
+          {STEPS.map((step, i) =>
+            reduceMotion ? (
+              <AccordionStep key={step.tag} step={step} index={i} open reduced />
+            ) : (
+              <AccordionStep
+                key={step.tag}
+                step={step}
+                index={i}
+                open={openSteps.includes(i)}
+                onSelect={toggleStep}
+              />
+            ),
+          )}
         </ol>
       </section>
     );

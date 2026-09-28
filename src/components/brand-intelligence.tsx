@@ -27,7 +27,7 @@ export function BrandIntelligence() {
   return (
     <section
       id="por-que-fazemos"
-      className="relative overflow-hidden px-6 py-28 sm:px-14 sm:py-40"
+      className="relative overflow-hidden px-6 pb-0 pt-28 sm:px-14 sm:py-40"
     >
       <motion.div
         initial={reduceMotion ? false : { opacity: 0, y: 28 }}
