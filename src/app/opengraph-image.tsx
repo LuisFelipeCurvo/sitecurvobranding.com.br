@@ -12,6 +12,10 @@ export default async function Image() {
     join(process.cwd(), "src/app/fonts/Optika-Black.otf")
   );
 
+  const logo = `data:image/png;base64,${readFileSync(
+    join(process.cwd(), "public/brand/logo.png")
+  ).toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -25,33 +29,8 @@ export default async function Image() {
           background: "#ffffff",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "baseline",
-            fontFamily: "Optika",
-            fontSize: 128,
-            fontWeight: 900,
-            color: "#000000",
-            letterSpacing: "-2px",
-          }}
-        >
-          <span>CURVO</span>
-          <span style={{ color: "#fc635b", marginLeft: 22 }}>+</span>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            fontFamily: "Optika",
-            fontSize: 128,
-            fontWeight: 900,
-            color: "#000000",
-            letterSpacing: "-2px",
-            marginTop: -16,
-          }}
-        >
-          BRANDING
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={logo} width={558} height={210} alt="" />
         <div
           style={{
             display: "flex",

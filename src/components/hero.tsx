@@ -30,12 +30,7 @@ export function Hero() {
   return (
     <div className="relative z-[3] flex min-h-screen flex-col">
       <header className="flex flex-col gap-4 px-6 pt-7 sm:flex-row sm:items-start sm:justify-between sm:gap-6 sm:px-14 sm:pt-9">
-        <div className="flex shrink-0 flex-col text-lg font-black uppercase leading-[1.05] tracking-[-0.02em] sm:text-[19px]">
-          <span className="flex items-baseline">
-            Curvo<span className="ml-[6px] text-coral">+</span>
-          </span>
-          <span>Branding</span>
-        </div>
+        <img src="/brand/logo.png" alt="Curvo Branding" width={372} height={140} className="h-10 sm:h-[42px] w-auto shrink-0 self-start" />
         <nav>
           <ul className="flex flex-wrap gap-x-4 gap-y-2 sm:gap-x-[18px] lg:gap-x-6">
             {NAV_ITEMS.map((item) => (

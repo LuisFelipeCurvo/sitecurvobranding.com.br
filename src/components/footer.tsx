@@ -29,12 +29,7 @@ export function Footer() {
       <div className="flex flex-row items-center justify-between gap-5 px-6 py-8 sm:gap-8 sm:px-14">
         {/* marca + redes + endereço */}
         <div className="flex min-w-0 flex-col gap-3">
-          <div className="flex flex-col text-[15px] font-black uppercase leading-[1.05] tracking-[-0.02em]">
-            <span className="flex items-baseline">
-              Curvo<span className="ml-[5px] text-coral">+</span>
-            </span>
-            <span>Branding</span>
-          </div>
+          <img src="/brand/logo.png" alt="Curvo Branding" width={372} height={140} className="h-8 w-auto shrink-0 self-start" />
 
           <ul className="flex items-center gap-2.5">
             {SOCIAL.map(({ label, href, Icon }) => (
