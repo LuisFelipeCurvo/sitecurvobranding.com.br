@@ -66,23 +66,23 @@ export function BrandIntelligence() {
             branco, sem moldura (bar.md — "fotografia sangrando o frame"). As
             duas espelhadas (`-scale-x-100`); o João "sai" pela beirada direita
             da tela (`translate-x` + `-mr` quebrando o padding + section
-            `overflow-hidden`). Sticky no desktop enquanto o texto rola. */}
-        <div className="-mr-6 flex items-end justify-end gap-0 self-start sm:-mr-14 sm:gap-2 md:sticky md:top-20">
+            `overflow-hidden`). No desktop assentam no pé do bloco, alinhadas ao CTA. */}
+        <div className="-mr-6 flex items-end justify-end gap-0 self-start sm:-mr-14 sm:gap-2 md:self-end">
           <Image
             src="/brand/founders.png"
             alt="Luis e Carola, sócios da Curvo Branding"
             width={1204}
             height={1920}
-            sizes="(max-width: 768px) 52vw, 340px"
-            className="w-[54%] shrink-0 -scale-x-100 md:w-[260px] lg:w-[340px]"
+            sizes="(max-width: 768px) 52vw, 480px"
+            className="w-[54%] shrink-0 -scale-x-100 md:w-[260px] lg:w-[340px] xl:w-[420px] 2xl:w-[480px]"
           />
           <Image
             src="/brand/joao.png"
             alt="João, da Curvo Branding"
             width={1432}
             height={1920}
-            sizes="(max-width: 768px) 40vw, 210px"
-            className="w-[40%] shrink-0 translate-x-[10%] -scale-x-100 md:w-[175px] md:translate-x-[18%] lg:w-[215px]"
+            sizes="(max-width: 768px) 40vw, 300px"
+            className="w-[40%] shrink-0 translate-x-[10%] -scale-x-100 md:w-[175px] md:translate-x-[18%] lg:w-[215px] xl:w-[265px] 2xl:w-[305px]"
           />
         </div>
       </motion.div>
