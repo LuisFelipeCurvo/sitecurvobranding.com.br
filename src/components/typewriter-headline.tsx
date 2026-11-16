@@ -18,7 +18,7 @@ import { useReducedMotion } from "framer-motion";
  * e com o texto **alinhado ao centro**, em três linhas com quebra fixa:
  *   linha 1 (fixa):     CONSTRUÍMOS AS MARCAS MAIS
  *   linha 2 (digitada): F*DAS E ESTRUTURADAS
- *   linha 3 (digitada): DO MERCADO
+ *   linha 3 (digitada): DO MERCADO EM CUIABÁ
  * O `<br>` entra quando a digitação passa de "estruturadas" — "DO" nunca fica
  * sozinho no fim da linha 2. Em tela bem estreita cada linha ainda pode quebrar
  * sozinha; a fonte só reduz por `clamp`.
@@ -32,7 +32,7 @@ import { useReducedMotion } from "framer-motion";
 
 const STATIC_TEXT = "Construímos as marcas mais";
 const TYPED_LINE_1 = "f*das e estruturadas";
-const TYPED_LINE_2 = "do mercado";
+const TYPED_LINE_2 = "do mercado em Cuiabá";
 // string única usada pelo loop de digitação e pelo aria-label; o render abaixo
 // insere a quebra entre as duas metades
 const TYPED_TEXT = `${TYPED_LINE_1} ${TYPED_LINE_2}`;
