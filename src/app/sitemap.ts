@@ -7,8 +7,8 @@ const BASE = "https://www.curvobranding.com.br";
 // mesmo sem a página ter mudado de verdade. Atualiza a data à mão quando o
 // conteúdo daquela página muda de fato.
 const LAST_MODIFIED = {
-  home: "2026-09-15",
-  cases: "2026-09-15",
+  home: "2026-11-16",
+  cases: "2026-11-16",
   privacidade: "2026-08-29",
 };
 
@@ -24,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${BASE}/cases/${c.slug}`,
       lastModified: LAST_MODIFIED.cases,
       changeFrequency: "yearly" as const,
-      priority: 0.6,
+      priority: 0.8,
     })),
     {
       url: `${BASE}/privacidade`,
